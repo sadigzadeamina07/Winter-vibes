@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+        }
+        #qar{
+            background:url('img/snowy.jpg') center/cover;
+            height:100vh;
+            position:relative;
+            overflow:hidden;
+        }
+        #qar *{position:absolute; background:url('img/snowflakes.png') center/ contain;}
+    </style>
+</head>
+<body>
+    <div id="qar"></div>
+
+    <script>
+let qar=document.getElementById('qar')
+let qardenecik=document.getElementById('qardenecik')
+    let y=0
+let arr=[]
+setInterval(create,1000)
+setInterval(move,40)
+function create(){
+    let id='y'+arr.length
+    let  size=rand(35,60)
+    let x=rand(0,innerWidth)
+    let y=-size
+    let speed=rand(15,25)/10
+    arr.push({id,size,x,y,speed})
+    qar.innerHTML+=`<div id=${id}></div>`
+}
+function move(){
+    for (const qardenecik of arr) {
+        if(qardenecik){
+            const el=document.getElementById(qardenecik.id)
+            if(y<innerHeight){
+                qardenecik.y+=qardenecik.speed
+                qardenecik.x+=Math.sin(.05 * qardenecik.y)*3
+                el.style.width=qardenecik.size+'px'
+                el.style.height=qardenecik.size+'px'
+                el.style.top=qardenecik.y+'px'
+                el.style.left=qardenecik.x+'px'
+            }
+            else{
+                el.remove()
+                let sil=arr.indexof(qardenecik)
+                delete arr[sil]
+            }
+        }
+    }
+}
+function rand(min, max) {
+   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+    </script>
+</body>
+</html>
