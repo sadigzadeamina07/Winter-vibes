@@ -19,11 +19,13 @@
 </head>
 <body>
     <div id="qar"></div>
-
+    <audio id="music" src="audio/letitsnow.mp3"  autoplay loop muted></audio>
     <script>
 let qar=document.getElementById('qar')
-let qardenecik=document.getElementById('qardenecik')
-    let y=0
+       let music= document.getElementById('music')
+       let fade
+setTimeout(musiqi,100)
+function musiqi(){music.muted=false }
 let arr=[]
 setInterval(create,1000)
 setInterval(move,40)
@@ -34,13 +36,13 @@ function create(){
     let y=-size
     let speed=rand(15,25)/10
     arr.push({id,size,x,y,speed})
-    qar.innerHTML+=`<div id=${id}></div>`
+    qar.innerHTML+=`<div id="${id}"></div>`
 }
 function move(){
     for (const qardenecik of arr) {
         if(qardenecik){
             const el=document.getElementById(qardenecik.id)
-            if(y<innerHeight){
+            if(qardenecik.y<innerHeight){
                 qardenecik.y+=qardenecik.speed
                 qardenecik.x+=Math.sin(.05 * qardenecik.y)*3
                 el.style.width=qardenecik.size+'px'
@@ -50,7 +52,7 @@ function move(){
             }
             else{
                 el.remove()
-                let sil=arr.indexof(qardenecik)
+                let sil=arr.indexOf(qardenecik)
                 delete arr[sil]
             }
         }
